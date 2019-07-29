@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+    <body>
+      <center>
+          <section class="jumbotron text-center">
+              <div class="container">
+                  <h1 class="jumbotron-heading">오늘의 나는...</h1>
+                  <p class="lead text-muted">오늘하루 가장 기억하고싶은 일을 기록해 보세요!</p>
+              </div>
+            </section>
+       <div class="container">
+
+         <form method="POST">
+           {% csrf_token %}
+           <table>
+             {{form.as_table}}
+           </table>
+           <br>
+              <input class="btn btn-dark" type="submit" value="제출하기">
+         </form>
+       </div>
+      </center>
+          
+    </body>
+    {%endblock%}

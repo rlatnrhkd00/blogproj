@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<body>
+  <center> 
+      <section class="jumbotron text-center">
+          <div class="container" >
+              <h1 class="jumbotron-heading">오늘의 나는...</h1>
+              <p class="lead text-muted">오늘하루 가장 기억하고싶은 일을 기록해 보세요!</p>
+              <p>
+                  <a href="{% url 'newblog' %}" class="btn btn-primary my-2">이야기추가!</a>
+              </p>
+          </div>
+        </section>
+    <div style="width: 500px ; height: 50px">
+      <div>
+    <br>
+        {% for blog in posts %}
+        <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{blog.title}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{blog.pub_date}}</h6>
+                  <p class="card-text">{{blog.summary}}</p>
+                  <a href="{%url 'detail' blog.id%}" class="card-link">...more</a>
+                </div>
+              </div>
+           
+        {%endfor%}
+        
+
+        <br><br>
+      </div>
+      <div class="container">
+        {% if posts.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{posts.previous_page_number}}">Previous</a>
+        {%endif%}
+
+        <span>{{posts.number}}</span>
+        <span>of</span>
+        <span>{{posts.paginator.num_pages}}</span>
+
+        {% if posts.has_next %}
+        <a href="?page={{posts.next_page_number}}">Next</a>
+        <a href="?page={{posts.paginator.num_pages}}">Last</a>
+        {% endif %}
+      </div>
+
+      {%endblock%}
+    </div>
+    <br><br>
+    </center>
+</body>
